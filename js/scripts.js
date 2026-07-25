@@ -1,34 +1,25 @@
-/*!
-* Start Bootstrap - Resume v7.0.6 (https://startbootstrap.com/theme/resume)
-* Copyright 2013-2023 Start Bootstrap
-* Licensed under MIT (https://github.com/StartBootstrap/startbootstrap-resume/blob/master/LICENSE)
-*/
-//
-// Scripts
-// 
+(() => {
+  const links = [...document.querySelectorAll('.main-nav a')];
+  const sections = links
+    .filter((link) => link.getAttribute('href').startsWith('#'))
+    .map((link) => document.querySelector(link.getAttribute('href')))
+    .filter(Boolean);
 
-window.addEventListener('DOMContentLoaded', event => {
-
-    // Activate Bootstrap scrollspy on the main nav element
-    const sideNav = document.body.querySelector('#sideNav');
-    if (sideNav) {
-        new bootstrap.ScrollSpy(document.body, {
-            target: '#sideNav',
-            rootMargin: '0px 0px -40%',
-        });
-    };
-
-    // Collapse responsive navbar when toggler is visible
-    const navbarToggler = document.body.querySelector('.navbar-toggler');
-    const responsiveNavItems = [].slice.call(
-        document.querySelectorAll('#navbarResponsive .nav-link')
-    );
-    responsiveNavItems.map(function (responsiveNavItem) {
-        responsiveNavItem.addEventListener('click', () => {
-            if (window.getComputedStyle(navbarToggler).display !== 'none') {
-                navbarToggler.click();
-            }
-        });
+  const setCurrentLink = (id) => {
+    links.forEach((link) => {
+      const current = link.getAttribute('href') === `#${id}`;
+      if (current) link.setAttribute('aria-current', 'page');
+      else link.removeAttribute('aria-current');
     });
+  };
 
-});
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries) => {
+      const active = entries
+        .filter((entry) => entry.isIntersecting)
+        .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+      if (active) setCurrentLink(active.target.id);
+    }, { rootMargin: '-18% 0px -58% 0px', threshold: [0.05, 0.2, 0.5] });
+    sections.forEach((section) => observer.observe(section));
+  }
+})();
