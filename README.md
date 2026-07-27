@@ -1,1 +1,1 @@
-https://lucassalamancaf.github.io/mywebsite/
+https://lucassalamancaf.github.io
