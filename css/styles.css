@@ -136,8 +136,8 @@ h1 { max-width: 14ch; font-size: clamp(1.45rem, 1.78vw, 2.3rem); line-height: 1.
 .date-list { display: grid; gap: 2rem; }
 .date-list > div { padding: 0; }
 .date-list dt { margin-bottom: .35rem; color: var(--text); font-size: .92rem; font-weight: 400; letter-spacing: 0; text-transform: none; }
-.date-list dd { margin: 0; font-size: .98rem; line-height: 1.28; }
-.date-list strong { font-weight: 400; }
+.date-list dd { margin: 0; color: var(--muted); font-size: .98rem; line-height: 1.28; }
+.date-list strong { color: var(--text); font-weight: 600; }
 
 .contact { min-height: 58vh; padding-bottom: 6rem; }
 .contact-intro { margin-top: 1.5rem; font-size: clamp(1.1rem, 1.55vw, 1.5rem); }
